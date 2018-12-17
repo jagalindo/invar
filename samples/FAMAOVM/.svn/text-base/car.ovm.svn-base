@@ -1,0 +1,4 @@
+%Relationships
+Transmission : [1,1] {Automatic   Manual};
+Engine : [1,2] {Electric   Gasoline};
+[Car] : [Cruise];

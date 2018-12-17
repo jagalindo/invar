@@ -1,0 +1,23 @@
+%Relationships
+SoundSystem : [0,9]InputSystem OutputSystem Amplifier Display Color RemoteControl Player [Equalizer] [BassBoost];
+InputSystem : [1,1]{ AntennaIn AnalogIn OpticalIn };
+OutputSystem : [1,1]{ Stereo HiFi2Point1 HiFi3Point1 HiFi5Point1 };
+Color : [1,1]{ Red Blue Green Yellow Black Silver };
+Player : [CDPlayer] [Radio] [0,9]OtherPlayer [0,9]Decoder;
+OtherPlayer : [1,1]{ Cassete RecordPlayer MiniDisc };
+CDPlayer : [1,1]{ SingleCD ThreeCDChanger FiveCDChanger };
+Radio : [1,1]{ FMRadio DABRadio };
+Display : [1,1]{ ColorDisplay MonoChromeDisplay };
+Decoder : [MP3Decoder] [WMADecoder] [AudioCDDecoder] [AtracDecoder] ;
+
+%Constraints
+RemoteControl;
+ColorDisplay OR MonoChromeDisplay;
+NOT Cassete OR NOT MiniDisc;
+MiniDisc IMPLIES OpticalIn;
+Stereo OR HiFi2Point1 OR HiFi3Point1 OR HiFi5Point1;
+(MP3Decoder OR WMADecoder) IMPLIES (SingleCD OR ThreeCDChanger OR FiveCDChanger);
+(SingleCD OR ThreeCDChanger OR FiveCDChanger) IMPLIES AudioCDDecoder;
+AtracDecoder IMPLIES MiniDisc;
+MiniDisc IMPLIES AtracDecoder;
+Radio IMPLIES AntennaIn;
